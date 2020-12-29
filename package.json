@@ -1,0 +1,33 @@
+{
+  "name": "react-native-searchable-picker",
+  "version": "1.0.0",
+  "description": "Dropdown picker with search function for React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-vector-icons": "^7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yugako/react-native-searchable-picker.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "dropdown",
+    "picker",
+    "picker",
+    "select",
+    "search"
+  ],
+  "author": "Yurii Hasiuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yugako/react-native-searchable-picker/issues"
+  },
+  "homepage": "https://github.com/yugako/react-native-searchable-picker#readme"
+}
