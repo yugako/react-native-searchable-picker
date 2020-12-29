@@ -6,11 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.4",
-    "react-native-vector-icons": "^7.1.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yugako/react-native-searchable-picker.git"
@@ -29,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/yugako/react-native-searchable-picker/issues"
   },
-  "homepage": "https://github.com/yugako/react-native-searchable-picker#readme"
+  "homepage": "https://github.com/yugako/react-native-searchable-picker#readme",
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.64.0"
+  }
 }
