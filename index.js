@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
   TouchableNativeFeedback,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+
 
 const RNSearchablePicker = ({
   placeholder,
@@ -18,7 +18,9 @@ const RNSearchablePicker = ({
   onSelect,
   inputStyles,
   containerStyles,
-  listStyles
+  emptyMessageStyles,
+  listStyles,
+  itemStyles
 }) => {
   const [inputValue, setInputValue] = useState(defaultValue);
   const [listVisibility, setListVisibility] = useState(false);
@@ -59,7 +61,11 @@ const RNSearchablePicker = ({
           background={TouchableNativeFeedback.Ripple(null, true)}
           onPress={() => setListVisibility(!listVisibility)}
         >
-          <Icon name="caret-down" style={{ padding: 10 }} size={16} />
+          {listVisibility 
+            ? <Text style={{fontSize: 28, color: '#000', padding: 10}}>&#9652;</Text>
+            : <Text style={{fontSize: 28, color: '#000', padding: 10}}>&#9662;</Text>
+          }
+         
         </Touchable>
       </View>
       {listVisibility ? (
@@ -83,14 +89,14 @@ const RNSearchablePicker = ({
                     setListVisibility(false);
                   }}
                 >
-                  <Text style={{ paddingVertical: 10, paddingHorizontal: 5 }}>
+                  <Text style={{ paddingVertical: 10, paddingHorizontal: 5, ...itemStyles }}>
                     {item.label}
                   </Text>
                 </Touchable>
               )}
             />
           ) : (
-            <Text>{emptyMessage}</Text>
+            <Text style={{textAlign: 'center', marginVertical: 5, ...emptyMessageStyles}}>{emptyMessage}</Text>
           )}
         </View>
       ) : null}
