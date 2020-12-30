@@ -11,7 +11,7 @@ The main purpose of this package is creating cool dropdown lists with simple sea
 ## Usage
 
 ```javascript
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import RNSearchablePicker from 'react-native-searchable-picker';
 
 const data = [
@@ -28,8 +28,7 @@ const data = [
     value: 'ion'
   }
 ]
-
-export const DropdownExample = (props) => {
+const App = () => {
   /**
    * Define local state for selected element
    */
@@ -39,6 +38,10 @@ export const DropdownExample = (props) => {
     setSelected(item);
   }
 
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
+
   return (
       <RNSearchablePicker
         onSelect={selectHandler}
@@ -46,10 +49,12 @@ export const DropdownExample = (props) => {
         placeholder='Choose an item'
         defaultValue={data[0].label}
         containerStyles={{marginHorizontal: 10}}
-        {...props}
+        listStyles={{maxHeight: 50}}
       />
   );
 }
+
+export default App;
 
 ```
 
