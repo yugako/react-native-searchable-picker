@@ -12,11 +12,13 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 const RNSearchablePicker = ({
   placeholder,
+  emptyMessage,
   defaultValue = "",
   data,
   onSelect,
   inputStyles,
   containerStyles,
+  listStyles
 }) => {
   const [inputValue, setInputValue] = useState(defaultValue);
   const [listVisibility, setListVisibility] = useState(false);
@@ -69,6 +71,7 @@ const RNSearchablePicker = ({
                 borderWidth: 1,
                 borderColor: '#ccc',
                 marginTop: 5,
+                ...listStyles
               }}
               data={filteredData}
               keyExtractor={(item) => item.value}
@@ -87,7 +90,7 @@ const RNSearchablePicker = ({
               )}
             />
           ) : (
-            <Text>Nothing to show</Text>
+            <Text>{emptyMessage}</Text>
           )}
         </View>
       ) : null}
