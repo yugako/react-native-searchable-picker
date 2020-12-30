@@ -57,6 +57,21 @@ const App = () => {
 export default App;
 
 ```
+## Props
+
+| Name          | Type               | Description | 
+| ------------- |:------------------:| ------------------:| 
+| data          | **Object**         | Must contains **value** and **label** fields |
+| placeholder   | **String**         | Placeholder for text field |
+| emptyMessage  | **String** | Shows when data array is empty |
+| defaultValue | **String** | Default value for text input |
+| onSelect | **Function** | Select callback, takes clicked item as parameter |
+| inputStyles | **Object** | Styles object for text input |
+| containerStyles | **Object** | Styles object for container |
+| emptyMessageStyles | **Object** | Styles object for empty message |
+| listStyles | **Object** | Styles object for dropdown list |
+| itemStyles | **Object** | Styles object for item in dropdown list |
+
 
 License
 ----
