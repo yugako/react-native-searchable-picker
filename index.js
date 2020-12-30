@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export const AppDropdown = ({
+const RNSearchablePicker = ({
   placeholder,
   defaultValue = "",
   data,
@@ -94,3 +94,6 @@ export const AppDropdown = ({
     </View>
   );
 };
+
+
+export default RNSearchablePicker;
