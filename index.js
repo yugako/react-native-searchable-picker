@@ -72,6 +72,7 @@ const RNSearchablePicker = ({
         <View>
           {Array.isArray(data) && data.length ? (
             <FlatList
+              nestedScrollEnabled={true}
               style={{
                 maxHeight: 150,
                 borderWidth: 1,
