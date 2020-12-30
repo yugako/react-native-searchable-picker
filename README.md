@@ -1,5 +1,7 @@
 # React Native Searchable Picker
 
+[https://img.shields.io/npm/v/react-native-searchable-picker](https://www.npmjs.com/package/react-native-searchable-picker)
+
 The main purpose of this package is creating cool dropdown lists with simple search functionality.
 
 ## Installation
