@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Platform,
   TextInput,
   View,
   Text,
   FlatList,
+  ScrollView,
   TouchableHighlight,
   TouchableNativeFeedback,
 } from "react-native";
 
-
-const RNSearchablePicker = ({
+const RNSearchablePicker = (({
   placeholder,
   emptyMessage,
   defaultValue = "",
@@ -20,8 +20,12 @@ const RNSearchablePicker = ({
   containerStyles,
   emptyMessageStyles,
   listStyles,
-  itemStyles
+  itemStyles,
+  flatList = true
 }) => {
+  
+  const ref = useRef(null);
+
   const [inputValue, setInputValue] = useState(defaultValue);
   const [listVisibility, setListVisibility] = useState(false);
   const [filteredData, setFilteredData] = useState(data);
@@ -31,12 +35,13 @@ const RNSearchablePicker = ({
 
   const onChange = (val) => {
     setInputValue(val);
-
     if (val.trim()) {
+      // Filtered data
       const filtered = data.filter((item) => item.label.includes(val));
-
+      // Check if empty
       if (filtered.length) setFilteredData(filtered);
     } else {
+      // Complete data withot filter 
       setFilteredData(data);
     }
   };
@@ -56,23 +61,47 @@ const RNSearchablePicker = ({
           onChangeText={onChange}
           placeholder={placeholder}
           style={{ flex: 1, ...inputStyles }}
+          ref={ref}
         />
-        <Touchable
-          background={TouchableNativeFeedback.Ripple(null, true)}
-          onPress={() => setListVisibility(!listVisibility)}
+        <Touchable background={TouchableNativeFeedback.Ripple(null, true)} onPress={() => { setListVisibility(!listVisibility); onChange(""); } }
         >
           {listVisibility 
             ? <Text style={{fontSize: 28, color: '#000', padding: 10}}>&#9652;</Text>
             : <Text style={{fontSize: 28, color: '#000', padding: 10}}>&#9662;</Text>
           }
-         
         </Touchable>
       </View>
       {listVisibility ? (
-        <View>
-          {Array.isArray(data) && data.length ? (
-            <FlatList
-              nestedScrollEnabled={true}
+      <View>
+        {Array.isArray(data) && data.length ? (
+          flatList ? (
+          <FlatList
+            nestedScrollEnabled={true}
+            style={{
+              maxHeight: 150,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              marginTop: 5,
+              ...listStyles
+            }}
+            data={filteredData}
+            keyExtractor={(item) => item.value}
+            renderItem={({ item }) => (
+              <Touchable
+                onPress={() => {
+                  onSelect(item);
+                  setInputValue(item.label);
+                  setListVisibility(false);
+                }}
+              >
+                <Text style={{ paddingVertical: 10, paddingHorizontal: 5, ...itemStyles }}>
+                  {item.label}
+                </Text>
+              </Touchable>
+            )}
+          />
+          ) : (
+            <ScrollView
               style={{
                 maxHeight: 150,
                 borderWidth: 1,
@@ -80,10 +109,10 @@ const RNSearchablePicker = ({
                 marginTop: 5,
                 ...listStyles
               }}
-              data={filteredData}
-              keyExtractor={(item) => item.value}
-              renderItem={({ item }) => (
+            >
+              {filteredData.map((item, index) => (
                 <Touchable
+                  key={index}
                   onPress={() => {
                     onSelect(item);
                     setInputValue(item.label);
@@ -94,16 +123,17 @@ const RNSearchablePicker = ({
                     {item.label}
                   </Text>
                 </Touchable>
-              )}
-            />
-          ) : (
-            <Text style={{textAlign: 'center', marginVertical: 5, ...emptyMessageStyles}}>{emptyMessage}</Text>
-          )}
-        </View>
+              ))}
+            </ScrollView>
+          )
+        ) : (
+          <Text style={{textAlign: 'center', marginVertical: 5, ...emptyMessageStyles}}>{emptyMessage}</Text>
+        )}
+      </View>
       ) : null}
     </View>
   );
-};
+});
 
 
 export default RNSearchablePicker;
