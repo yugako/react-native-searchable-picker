@@ -21,10 +21,11 @@ const RNSearchablePicker = (({
   emptyMessageStyles,
   listStyles,
   itemStyles,
-  flatList = true
+  flatList = true,
+  ref = null
 }) => {
   
-  const ref = useRef(null);
+  const formRef = useRef( ref || null);
 
   const [inputValue, setInputValue] = useState(defaultValue);
   const [listVisibility, setListVisibility] = useState(false);
@@ -38,12 +39,17 @@ const RNSearchablePicker = (({
     if (val.trim()) {
       // Filtered data
       const filtered = data.filter((item) => item.label.includes(val));
-      // Check if empty
       if (filtered.length) setFilteredData(filtered);
     } else {
       // Complete data withot filter 
       setFilteredData(data);
     }
+  };
+
+  const onPress = () => {
+    // Open up list of items with filtered data empty
+    setListVisibility(!listVisibility); 
+    onChange("");
   };
 
   return (
@@ -61,10 +67,9 @@ const RNSearchablePicker = (({
           onChangeText={onChange}
           placeholder={placeholder}
           style={{ flex: 1, ...inputStyles }}
-          ref={ref}
+          ref={formRef}
         />
-        <Touchable background={TouchableNativeFeedback.Ripple(null, true)} onPress={() => { setListVisibility(!listVisibility); onChange(""); } }
-        >
+        <Touchable background={TouchableNativeFeedback.Ripple(null, true)} onPress={onPress}>
           {listVisibility 
             ? <Text style={{fontSize: 28, color: '#000', padding: 10}}>&#9652;</Text>
             : <Text style={{fontSize: 28, color: '#000', padding: 10}}>&#9662;</Text>
