@@ -12,6 +12,7 @@ import {
 
 const RNSearchablePicker = ({
   placeholder,
+  placeholderTextColor,
   emptyMessage,
   defaultValue = "",
   data,
@@ -55,6 +56,7 @@ const RNSearchablePicker = ({
           value={inputValue}
           onChangeText={onChange}
           placeholder={placeholder}
+          placeholderTextColor={placeholderTextColor}
           style={{ flex: 1, ...inputStyles }}
         />
         <Touchable
