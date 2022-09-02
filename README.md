@@ -48,6 +48,7 @@ const App = () => {
       <RNSearchablePicker
         onSelect={selectHandler}
         data={data}
+        placeholderTextColor='#bcbcbc'
         placeholder='Choose an item'
         defaultValue={data[0].label}
         containerStyles={{marginHorizontal: 10}}
