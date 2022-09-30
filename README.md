@@ -48,6 +48,7 @@ const App = () => {
       <RNSearchablePicker
         onSelect={selectHandler}
         data={data}
+        placeholderTextColor='#bcbcbc'
         placeholder='Choose an item'
         defaultValue={data[0].label}
         containerStyles={{marginHorizontal: 10}}
@@ -64,6 +65,7 @@ export default App;
 | Name          | Type               | Description | 
 | ------------- |:------------------:| ------------------:| 
 | data          | **Object**         | Must contains **value** and **label** fields |
+| placeholderTextColor | **String** | Color for the placeholder text |
 | placeholder   | **String**         | Placeholder for text field |
 | emptyMessage  | **String** | Shows when data array is empty |
 | defaultValue | **String** | Default value for text input |
